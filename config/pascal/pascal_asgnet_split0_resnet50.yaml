@@ -33,7 +33,7 @@ TRAIN:
   manual_seed: 321
   print_freq: 100
   save_freq: 20
-  save_path: exp/asgnet/pascal/split0_resnet50/model
+  save_path: exp/pascal_asgnet_split0_resnet50/checkpoints
   weight:
   resume: 
   evaluate: True

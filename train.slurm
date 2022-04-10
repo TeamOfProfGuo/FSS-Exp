@@ -14,13 +14,12 @@ module purge
 dataset=$1
 model_name=$2
 exp_name=$3
-exp_dir=exp/${dataset}/${exp_name}
-model_dir=${exp_dir}/model
-result_dir=${exp_dir}/result
-config=config/${dataset}/${dataset}_${model_name}_${exp_name}.yaml
-mkdir -p ${model_dir} ${result_dir}
+exp_dir=exp/${dataset}_${model_name}_${exp_name}
+save_dir=exp/${dataset}_${model_name}_${exp_name}/checkpoints
+config_dir=config/${dataset}/${dataset}_${model_name}_${exp_name}.yaml
+mkdir -p ${save_dir}
 now=$(date +"%Y%m%d_%H%M%S")
-cp ${config} ${exp_dir}
+cp ${config_dir} ${exp_dir}
 
 # Singularity path
 ext3_path=/scratch/$USER/overlay-25GB-500K.ext3
@@ -31,5 +30,5 @@ singularity exec --nv --overlay ${ext3_path}:ro ${sif_path} \
 /bin/bash -c "
 source /ext3/env.sh
 cd /scratch/$USER/FSS-Exp
-python train.py --config=${config} > ${result_dir}/train-${now}.log 2>&1
+python train.py --config=${config_dir} > ${exp_dir}/train-${now}.log 2>&1
 "
