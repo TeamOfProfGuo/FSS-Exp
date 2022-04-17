@@ -16,3 +16,4 @@ exp/
 *.pickle
 *.pyc
 *.xml
+*.obj
