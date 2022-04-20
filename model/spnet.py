@@ -134,6 +134,9 @@ class SPNet(nn.Module):
             supp_feat = self.down_conv(supp_feat)
             supp_feat_list.append(supp_feat)  # shot x [bs x 256 x h x w]
 
+            # # use last res block only
+            # supp_feat_list.append(supp_feat_3)
+
         ################## Adaptive Superpixel Clustering ######################
 
         bs, _, max_num_sp, _ = s_fg_seed.size()  # bs x shot x max_num_sp x 2
@@ -170,7 +173,7 @@ class SPNet(nn.Module):
                         sp_bg_center_list.append(self.sp_center(
                             s_seed=s_bg_seed_,
                             supp_feat=supp_feat_,
-                            supp_mask=supp_fg_mask
+                            supp_mask=supp_bg_mask
                         ))
 
             sp_fg_center = torch.cat(sp_fg_center_list, dim=1)   # c x num_sp_all (collected from all shots)

@@ -170,7 +170,7 @@ def main():
         s_x=s_x.cpu(),
         s_y=s_y.cpu(),
     )
-    torch.save(dump_dict, 'pred.obj')
+    torch.save(dump_dict, 'fixed_pred_down.obj')
 
 if __name__ == '__main__':
     main()
